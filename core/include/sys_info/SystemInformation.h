@@ -4,6 +4,7 @@
 
 #ifndef CPU_INFO_SYSTEMINFORMATION_H
 #define CPU_INFO_SYSTEMINFORMATION_H
+
 #include <cstdint>
 
 namespace sys_info
@@ -11,8 +12,8 @@ namespace sys_info
     class SystemInformation
     {
     public:
-        SystemInformation();
-        virtual ~SystemInformation();
+        // Get the singleton instance
+        static SystemInformation& GetInstance();
 
         /**
          * @brief Get Total Available Memory Bytes
@@ -30,7 +31,16 @@ namespace sys_info
         int64_t GetTotalUsageMemory();
         double GetCpuTotalUsage();
 
+        // Delete copy constructor and assignment operator to prevent cloning
+        SystemInformation(const SystemInformation&) = delete;
+        SystemInformation& operator=(const SystemInformation&) = delete;
+
     private:
+        // Private constructor to prevent external instantiation
+        SystemInformation();
+        ~SystemInformation();
+
+        // Private implementation structure
         struct PImpl;
 
         PImpl *m_impl;

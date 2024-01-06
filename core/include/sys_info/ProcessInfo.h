@@ -12,8 +12,8 @@ namespace sys_info
     class ProcessInfo
     {
     public:
-        ProcessInfo();
-        ~ProcessInfo();
+        // Get the singleton instance
+        static ProcessInfo& GetInstance();
 
         /*!
          * Get Current % Cpu Usage
@@ -26,7 +26,16 @@ namespace sys_info
          */
         int64_t GetMemoryUsage();
 
+        // Delete copy constructor and assignment operator to prevent cloning
+        ProcessInfo(const ProcessInfo&) = delete;
+        ProcessInfo& operator=(const ProcessInfo&) = delete;
+
     private:
+        // Private constructor to prevent external instantiation
+        ProcessInfo();
+        ~ProcessInfo();
+
+        // Private implementation structure
         struct PImpl;
 
         PImpl *m_impl;

@@ -168,6 +168,12 @@ namespace sys_info
 
 namespace sys_info
 {
+    SystemInformation& SystemInformation::GetInstance()
+    {
+        static SystemInformation instance;
+        return instance;
+    }
+
     SystemInformation::SystemInformation()
     {
         m_impl = new PImpl();

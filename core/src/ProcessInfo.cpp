@@ -230,6 +230,12 @@ namespace sys_info
 
 namespace sys_info
 {
+    ProcessInfo& ProcessInfo::GetInstance()
+    {
+        static ProcessInfo instance;
+        return instance;
+    }
+
     ProcessInfo::ProcessInfo()
     {
         m_impl = new PImpl();
